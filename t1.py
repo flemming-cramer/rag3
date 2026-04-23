@@ -2,9 +2,10 @@ import sys
 sys.path.insert(0, '/tmp/click_pkg')
 import click
 
+import chatcore
 from chatcore import answer
-cs = chatcore
-cs.load_docs()
+
+chatcore.load_docs()
 
 @click.command()
 def chat():
