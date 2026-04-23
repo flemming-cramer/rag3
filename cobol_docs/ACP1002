@@ -1,0 +1,35 @@
+       IDENTIFICATION DIVISION.                                         0001.000
+       PROGRAM-ID.                 ACP1002.                             0002.000
+       AUTHOR.                     PIA LùSCHENKOHL.                     0003.000
+           DATE WRITTEN.               29/10-1987.                      0004.000
+           REMARKS.                                                     0005.000
+                                    UNDERPROGRAM TIL ET CSP-PROGRAM.    0006.000
+                                    PROGRAMMET HùRER TIL TOMME BOLIG    0007.000
+                                    SYSSTEMET ACP6000-ACP6500.          0008.000
+       ENVIRONMENT DIVISION.                                            0009.000
+       DATA DIVISION.                                                   0010.000
+       WORKING-STORAGE SECTION.                                         0011.000
+       01  WS-COMMAREA.                                                 0012.000
+           12  PARM1               PIC X.                               0013.000
+           12  PARM2               PIC X.                               0014.000
+           12  PARM3               PIC X.                               0015.000
+           12  RETUR               PIC 99.                              0016.000
+       LINKAGE SECTION.                                                 0017.000
+       01  DFHCOMMAREA             PIC X(5).                            0018.000
+       PROCEDURE DIVISION.                                              0019.000
+      ****************************************************************  0020.000
+           MOVE DFHCOMMAREA TO WS-COMMAREA.                             0021.000
+           IF PARM1 NOT NUMERIC                                         0022.000
+              MOVE 01 TO RETUR                                          0023.000
+           ELSE                                                         0024.000
+              MOVE 00 TO RETUR.                                         0029.000
+           IF RETUR = 00                                                0030.000
+              IF PARM2 NOT = '-'                                        0031.000
+                 MOVE 02 TO RETUR.                                      0032.000
+           IF RETUR = 00                                                0033.000
+              IF PARM3 NOT NUMERIC                                      0034.000
+                 MOVE 01 TO RETUR.                                      0035.000
+           MOVE WS-COMMAREA TO DFHCOMMAREA.                             0036.000
+           EXEC CICS RETURN                                             0037.000
+                END-EXEC.                                               0038.000
+           GOBACK.                                                      0039.000
