@@ -15,8 +15,12 @@ def load_docs():
     docs = []
     for file in os.listdir("cobol_docs"):
         if file.endswith(".cbl") or file.endswith(".txt"):
-            loader = TextLoader(os.path.join("cobol_docs", file))
-            docs.extend(loader.load())
+            try:
+                loader = TextLoader(os.path.join("cobol_docs", file), encoding="cp1252")
+                docs.extend(loader.load())
+            except Exception:
+                loader = TextLoader(os.path.join("cobol_docs", file), encoding="latin-1")
+                docs.extend(loader.load())
     return docs
 
 def create_db():
